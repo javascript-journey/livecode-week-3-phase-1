@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	h1= title
+	a(href="add-products") Tambah
+	table
+		thead
+			th Name Products
+			th Price
+			th Category
+			tbody
+				for products, index in data
+					tr
+						td #{products.name}
+						td #{products.price}
+						td #{products.category}
+

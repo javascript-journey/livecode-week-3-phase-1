@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h1= title
+	a(href="") Tambah
+	form(action='/proses-add-produk', method='POST')
+
+		p Name
+		input(type='text', name='name')|
+		p Price
+		input(type='text', name='price')|
+		p Category
+		input(type='text', name='category')|
+		button(type="submit") Simpan
