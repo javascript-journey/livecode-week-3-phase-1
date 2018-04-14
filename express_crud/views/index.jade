@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  
+  br
+  br
+  br
+  form(method='post')
+    p Nama Produk: 
+      br
+      input(type='text', name='name')
+    p Harga Produk: 
+      br
+      input(type='text', name='price')
+    p Kategori Produk: 
+      br
+      select
+        option(value='volvo') Volvo
+        option(value='saab') Saab
+        option(value='opel') Opel
+        option(value='audi') Audi
+    p
+      input(type='submit', value='Tambahkan')
