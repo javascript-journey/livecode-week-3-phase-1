@@ -8,10 +8,15 @@ block content
 			th Name Products
 			th Price
 			th Category
+			th Edit
+			th Hapus
 			tbody
 				for products, index in data
 					tr
 						td #{products.name}
 						td #{products.price}
 						td #{products.category}
-
+						td
+							a(href="/products-edit/"+products.id) Edit
+							td
+								a(href="/delete/"+products.id) Hapus

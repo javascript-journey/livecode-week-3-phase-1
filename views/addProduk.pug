@@ -1,8 +1,7 @@
 extends layout
 
 block content
-	h1= title
-	a(href="") Tambah
+	p Tambah Produk
 	form(action='/proses-add-produk', method='POST')
 
 		p Name
@@ -11,4 +10,5 @@ block content
 		input(type='text', name='price')|
 		p Category
 		input(type='text', name='category')|
-		button(type="submit") Simpan
+		p
+			button(type="submit") Simpan

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	p Edit Produk #{name}
+	
+	form(action='/proses-edit-produk/'+id, method='POST')
+		p Name
+		input(type='text', name='name', value=name)|
+		p Price
+		input(type='text', name='price', value=price)|
+		p Category
+		input(type='text', name='category', value=category)|
+		p
+			input(type="hidden", name="_method", value="PUT")|
+			button(type="submit") Simpan
