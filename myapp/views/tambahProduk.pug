@@ -2,31 +2,20 @@ extends layout
 
 block content
 
-  h1 #{title}
-
-    .main.container
-    .row
-      .col-md-6.col-md-offset-3
-        h1.display-4.m-b-2 Produk 
-
+        h1 #{title} 
         //form
-        form(method='POST' action='/produk')
-          div.form-group
-            label(for='name') Nama:
+        form(method='POST' action='/proses-tambah-produk')
+          div
+            label(for='name') Nama Produk:
             .br
-            input#name.form-control(type='text', placeholder='Nama' name='name')
-            
-          div.form-group
+            input#name.form-control(type='text', placeholder='Isi Nama' name='name' autocomplete='off')
+          div
             label(for='price') Price:
             .br
-            input#price.form-control(type='price', placeholder='Price' name='price')
-            
-
-          div.form-group
+            input#price.form-control(type='price', placeholder='Isi Price' name='price' autocomplete='off')
+          div
             label(for='category') Category:
             .br
-            input#category.form-control(type='text', placeholder='Category' name='category')
-            
-            .br
-            .br
+            input#category.form-control(type='text', placeholder='Isi Category' name='category' autocomplete='off')
+            p
           button.btn.btn-primary(type='submit') Submit

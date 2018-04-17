@@ -3,16 +3,25 @@ extends layout
 block content
 
   h1 Welcome to #{title}
+    .main.container
+    .row
+      .col-md-6.col-md-offset-3
   a(href='tambah-produk',type='button') Tambah Produk
   table
     thead
       th Nama 
       th Price
       th Category
+      th Edit 
+      th Hapus
       tbody
+        if data_produk > 0
+        tr
         for produk, index in data
-          tr
             td #{produk.name}
             td #{produk.price}
             td #{produk.category}
-
+            td 
+              a(href="/edit-produk/"+produk.id) Edit 
+              td 
+                a(href="/delete-produk/"+produk.id) Hapus 

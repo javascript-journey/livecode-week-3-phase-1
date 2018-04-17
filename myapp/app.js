@@ -3,32 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
- 
 var sqlite = require('sqlite3').verbose();
-var file = 'todo.db';
+var file = 'todo-js.db';
 var db = new sqlite.Database(file);
 var fs = require('fs');
 
-// Sample Data
-var produk = [
-{
-	"name": "Sikat Gigi",
-	"price": "5000",
-	"category": "Umum"
-},
-{
-	"name": "Sabun Lifeboy",
-	"price": "3500",
-	"category": "Umum"
-}
-];
-
 var CREATE_TABLE_PRODUK = "CREATE TABLE IF NOT EXISTS produk ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR NOT NULL, price INTEGER NOT NULL , category VARCHAR NOT NULL )";
-
 
 // Run SQL one at a time
 db.serialize(function() {
-
     // Create table
     db.run(CREATE_TABLE_PRODUK, function(err) {
     	if (err) {
@@ -37,18 +20,7 @@ db.serialize(function() {
     		console.log('CREATE TABLE SUCCES');
     	}
     });
-
-    var insertProduk = db.prepare("INSERT INTO produk (name,price,category) VALUES (?, ?,?)");
-    for (var i = 0; i < produk.length; i++) {
-    	insertProduk.run(produk[i].name, produk[i].price ,produk[i].category);
-    }
-    insertProduk.finalize();
-
-
 });
-
-
-
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -67,6 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/tambah-produk', indexRouter); 
+app.use('/proses-tambah-produk', indexRouter); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
