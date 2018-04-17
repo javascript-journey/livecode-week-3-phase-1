@@ -1,25 +1,32 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.container.container-fluid
+    h3 Daftar Produk
+    if b == 'y'
+      br
+      div.alert.alert-succes Berhasil menambahkan produk
+      br
+    a(href='/tambah-produk', class='btn btn-primary') Tambah Produk
+    br
+    br
   
-  br
-  br
-  br
-  form(method='post')
-    p Nama Produk: 
-      br
-      input(type='text', name='name')
-    p Harga Produk: 
-      br
-      input(type='text', name='price')
-    p Kategori Produk: 
-      br
-      select
-        option(value='volvo') Volvo
-        option(value='saab') Saab
-        option(value='opel') Opel
-        option(value='audi') Audi
-    p
-      input(type='submit', value='Tambahkan')
+    - var n = 1
+    table(class='table table-bordered table-striped')
+      thead
+        th No
+        th Nama
+        th Harga
+        th Kategori
+        th Aksi
+      tbody
+        each product in data
+          tr
+            td(width='2%') #{n++}
+            td #{product.name}
+            td #{product.price}
+            td #{product.category}
+            td(width='13%', align='center')
+              a(href='/edit-produk/' + product.id, class='btn btn-primary') Edit
+              | 
+              a(href='/hapus-produk/' + product.id, class='btn btn-danger') Hapus
