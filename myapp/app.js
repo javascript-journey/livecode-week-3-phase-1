@@ -3,8 +3,51 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('demodb.db');
+ 
+var sqlite = require('sqlite3').verbose();
+var file = 'todo.db';
+var db = new sqlite.Database(file);
+var fs = require('fs');
+
+// Sample Data
+var produk = [
+{
+	"name": "Sikat Gigi",
+	"price": "5000",
+	"category": "Umum"
+},
+{
+	"name": "Sabun Lifeboy",
+	"price": "3500",
+	"category": "Umum"
+}
+];
+
+var CREATE_TABLE_PRODUK = "CREATE TABLE IF NOT EXISTS produk ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR NOT NULL, price INTEGER NOT NULL , category VARCHAR NOT NULL )";
+
+
+// Run SQL one at a time
+db.serialize(function() {
+
+    // Create table
+    db.run(CREATE_TABLE_PRODUK, function(err) {
+    	if (err) {
+    		console.log(err);
+    	} else {
+    		console.log('CREATE TABLE SUCCES');
+    	}
+    });
+
+    var insertProduk = db.prepare("INSERT INTO produk (name,price,category) VALUES (?, ?,?)");
+    for (var i = 0; i < produk.length; i++) {
+    	insertProduk.run(produk[i].name, produk[i].price ,produk[i].category);
+    }
+    insertProduk.finalize();
+
+
+});
+
+
 
 
 var indexRouter = require('./routes/index');
@@ -29,13 +72,6 @@ app.use('/users', usersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-
-db.serialize(function() {
-    db.run("CREATE TABLE IF NOT EXISTS produk (id INT ,name TEXT, price INTEGER,category TEXT)");
-    db.run("INSERT INTO produk (name, price,category) VALUES (?, ?,?)", "Pena", 1500,"Alat Tulis");
-})
-
 
 // error handler
 app.use(function(err, req, res, next) {

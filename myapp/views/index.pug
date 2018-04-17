@@ -3,32 +3,16 @@ extends layout
 block content
 
   h1 Welcome to #{title}
-
-  .main.container
-    .row
-      .col-md-6.col-md-offset-3
-        h1.display-4.m-b-2 Produk 
-
-        //form
-        form(method='POST' action='/produk')
-          div.form-group
-            label(for='name') Nama:
-            .br
-            input#name.form-control(type='text', placeholder='Nama' name='name')
-            
-          div.form-group
-            label(for='price') Price:
-            .br
-            input#price.form-control(type='price', placeholder='Price' name='price')
-            
-
-          div.form-group
-            label(for='category') Category:
-            .br
-            input#category.form-control(type='text', placeholder='Category' name='category')
-            
-            .br
-            .br
-          button.btn.btn-primary(type='submit') Submit
-
+  a(href='tambah-produk',type='button') Tambah Produk
+  table
+    thead
+      th Nama 
+      th Price
+      th Category
+      tbody
+        for produk, index in data
+          tr
+            td #{produk.name}
+            td #{produk.price}
+            td #{produk.category}
 
