@@ -2,17 +2,38 @@ extends layout
 
 block content
  h1= title
- form
-  label Nama Produk : 
-  input#nama_produk
+ form(action="/tambah-produk", method="POST")
+  div.row
+  div.form-group.col-sm-3
+    label Nama Produk :
+    input(type="text", name="name", placeholder="Nama Produk")#nama_produk.form-control
   
-  label 
-  label Harga Produk : 
-  input#harga_produk
+  div.form-group.col-sm-3
+    label Harga Produk :
+    input(type="number", name="price", placeholder="Harga Produk")#harga_produk.form-control
 
-  label 
-  label Kategori Produk : 
-  input#kategori_produk
+  div.form-group.col-sm-3
+    label Kategori Produk :
+    input(type="text", name="category", placeholder="Kategori Produk")#kategori_produk.form-control
   
-  label 
-  button#submit_produk  Submit
+  div.form-group.col-sm-3
+    br
+    button.btn.btn-success(type="submit") Tambah
+
+  div.form-group.col-sm-12
+    table.table.table-hover
+      thead
+        th Nama Produk
+        th Harga Produk
+        th Kategori
+        th Aksi
+          tbody
+            each daftar_produk in daftar_produks
+              tr
+                td #{daftar_produk.name}
+                td #{daftar_produk.price}
+                td #{daftar_produk.category}
+                td 
+                  a(href="/edit-produk/"+daftar_produk.id).btn.btn-info Edit
+                  ||
+                  a(href="/hapus-produk/"+daftar_produk.id).btn.btn-danger Hapus

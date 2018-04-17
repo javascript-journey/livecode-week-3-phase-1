@@ -1,0 +1,21 @@
+extends layout
+
+block content
+ h1= title
+ form(action="/proses-edit-produk/"+id, method="POST")
+  div.row
+  div.form-group.col-sm-3
+    label Nama Produk :
+    input(type="text", name="name", placeholder="Nama Produk", value=name)#nama_produk.form-control
+  
+  div.form-group.col-sm-3
+    label Harga Produk :
+    input(type="number", name="price", placeholder="Harga Produk", value=price)#harga_produk.form-control
+
+  div.form-group.col-sm-3
+    label Kategori Produk :
+    input(type="text", name="category", placeholder="Kategori Produk", value=category)#kategori_produk.form-control
+  
+  div.form-group.col-sm-3
+    br
+    button.btn.btn-success(type="submit") Simpan
