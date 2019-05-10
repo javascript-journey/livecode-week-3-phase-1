@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  div.container.container-fluid
+    h3 Daftar Produk
+    if b == 'y'
+      br
+      div.alert.alert-succes Berhasil menambahkan produk
+      br
+    a(href='/tambah-produk', class='btn btn-primary') Tambah Produk
+    br
+    br
+  
+    - var n = 1
+    table(class='table table-bordered table-striped')
+      thead
+        th No
+        th Nama
+        th Harga
+        th Kategori
+        th Aksi
+      tbody
+        each product in data
+          tr
+            td(width='2%') #{n++}
+            td #{product.name}
+            td #{product.price}
+            td #{product.category}
+            td(width='13%', align='center')
+              a(href='/edit-produk/' + product.id, class='btn btn-primary') Edit
+              | 
+              a(href='/hapus-produk/' + product.id, class='btn btn-danger') Hapus

@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  div.container
+    br
+    br
+    br
+    div.row
+      div.col-md-6.col-md-offset-3
+        h3= title
+        br
+        if message
+          h4 #{message}
+        if message == false
+          h4 Tambah produk gagal!
+        form(action='/tambah-produk', method='post')
+          div.form-group
+            label(for='name') Nama Produk: 
+            input(type='text', name='name').form-control#name
+          div.form-group
+            label(for='price') Harga Produk: 
+            input(type='text', name='price').form-control#price
+          div.form-group
+            label(for='category') Kategori Produk: 
+            select(name='category').form-control#category
+              option(value='Sembako') Sembako
+              option(value='Obat-obatan') Obat-obatan
+              option(value='Umum') Umum
+          div.form-group
+            input(type='submit', value='Tambahkan').btn.btn-primary
